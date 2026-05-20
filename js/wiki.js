@@ -9,17 +9,17 @@ async function cargarArticulo(nombre) {
 
     try {
         cont.innerHTML = "Cargando...";
-        // QUITAMOS 'Cache-Control' y dejamos solo lo básico para evitar el bloqueo CORS
+        // Quitamos cualquier cabecera extra que pueda activar el preflight de CORS
         const res = await fetch(url, { 
+            method: 'GET',
             headers: { 
-                'Authorization': `token ${GH_TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json'
+                'Authorization': 'token ' + GH_TOKEN
             } 
         });
         
         if (res.status === 404) {
             cont.innerHTML = `<h2>${nombre}</h2><p>El post no existe.</p>
-            <button onclick="editar('${nombre}', '# ${nombre.toUpperCase()}', '')">✨ Crear</button>`;
+            <button onclick="editar('${nombre}', '# ${nombre.toUpperCase()}', '')">✨ Crear este post</button>`;
             return;
         }
         
@@ -28,45 +28,38 @@ async function cargarArticulo(nombre) {
         const render = marked.parse(content.replace(/([RULDFB]['2]?)/g, '<span class="alg">$&</span>'));
         
         cont.innerHTML = `<div class="texto-md">${render}</div>
-        <hr><button onclick="editar('${nombre}', \`${content.replace(/`/g, '\\`')}\`, '${data.sha}')">✏️ Editar</button>`;
-        
+        <hr><button onclick="editar('${nombre}', \`${content.replace(/`/g, '\\`')}\`, '${data.sha}')">✏️ Editar post</button>`;
     } catch (e) { 
-        cont.innerHTML = "Error crítico de conexión: " + e.message;
+        console.error(e);
+        cont.innerHTML = "Error de conexión. Revisa la consola."; 
     }
 }
 
 function editar(nombre, texto, sha) {
     document.getElementById('contenido-wiki').innerHTML = `
-        <h3>Editando: ${nombre}</h3>
         <textarea id="editor">${texto}</textarea><br>
-        <button onclick="guardar('${nombre}', '${sha}')">💾 Guardar</button>
-        <button onclick="cargarArticulo('${nombre}')">Cancelar</button>`;
+        <button onclick="guardar('${nombre}', '${sha}')">💾 Guardar</button>`;
 }
 
 async function guardar(nombre, sha) {
     const contenido = document.getElementById('editor').value;
-    const contentEncoded = btoa(unescape(encodeURIComponent(contenido)));
-    
-    const body = { message: "Update " + nombre, content: contentEncoded };
+    const body = { 
+        message: "Update", 
+        content: btoa(unescape(encodeURIComponent(contenido))) 
+    };
     if (sha && sha !== "undefined") body.sha = sha;
 
-    // Igual aquí, quitamos cabeceras innecesarias para evitar CORS
     const res = await fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/post/${nombre}.md`, {
         method: 'PUT',
         headers: { 
-            'Authorization': `token ${GH_TOKEN}`, 
-            'Content-Type': 'application/json' 
+            'Authorization': 'token ' + GH_TOKEN,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
     });
     
-    if (res.ok) { 
-        alert("¡Guardado!"); 
-        cargarArticulo(nombre); 
-    } else { 
-        const err = await res.json();
-        alert("Error al subir: " + err.message); 
-    }
+    if (res.ok) { alert("¡Guardado!"); cargarArticulo(nombre); } 
+    else { alert("Error al subir"); }
 }
 
 window.onload = () => cargarArticulo('inicio');
