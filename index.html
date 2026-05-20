@@ -3,36 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki Rubik Abierta</title>
-    <link rel="stylesheet" href="css/estilos.css">
-    <!-- Renderizador ligero de Markdown a HTML -->
+    <title>Cubopedia 🧊</title>
+    <link rel="icon" type="image/png" href="web/imágen/logo.png">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: #eee; padding: 10px; }
+        .contenedor { max-width: 800px; margin: auto; }
+        header { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            border-bottom: 2px solid #444; 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+        }
+        .logo-header { width: 50px; height: auto; }
+        .menu-articulos { background: #252525; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+        .menu-articulos input { background: #333; border: 1px solid #555; color: white; padding: 8px; width: 60%; }
+        .alg { background: #444; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+        main { background: #252525; padding: 15px; border-radius: 5px; }
+        button { background: #444; color: white; border: none; padding: 8px 12px; cursor: pointer; }
+        textarea { width: 100%; height: 300px; background: #333; color: white; border: 1px solid #555; padding: 10px; }
+    </style>
 </head>
 <body>
+    <div class="contenedor">
+        <header>
+            <img src="web/imágen/logo.png" alt="Logo" class="logo-header">
+            <div>
+                <h1 style="margin:0;">Cubopedia 🧊</h1>
+                <p style="color:#ffffff; font-size:0.8em; margin:0;">La wiki de Cubos que no le pertenece a nadie</p>
+            </div>
+        </header>
 
-    <header style="text-align:center; padding: 10px; background:#f4f4f4; border-bottom:1px solid #ddd;">
-        <h1>Cubopedia 🧊</h1>
-        <p>La wiki del cubo de Rubik sin dueños ni filtros</p>
-    </header>
-
-    <div class="contenedor" style="display:flex; flex-wrap:wrap; padding:15px; gap:20px;">
-        <!-- Menú de Navegación Lateral -->
-        <nav class="menu-articulos" style="flex:1; min-width:200px; background:#fafafa; padding:15px; border-radius:5px;">
-            <h3>Secciones</h3>
-            <ul style="list-style:none; padding:0; line-height:2;">
-                <li><a href="#" onclick="cargarArticulo('inicio')">🏠 Inicio</a></li>
-                <li><a href="#" onclick="cargarArticulo('metodo-principiantes')">Método Principiantes</a></li>
-                <li><a href="#" onclick="cargarArticulo('notacion')">Notación Oficial</a></li>
-                <li><a href="#" onclick="cargarArticulo('pyraminx')">Pyraminx</a></li>
-            </ul>
+        <nav class="menu-articulos">
+            <input type="text" id="busqueda" placeholder="Buscar o crear...">
+            <button onclick="cargarArticulo(document.getElementById('busqueda').value.toLowerCase().replace(/ /g,'-'))">Ir</button>
         </nav>
 
-        <!-- Vista del Post / Editor -->
-        <main id="contenido-wiki" style="flex:3; min-width:300px; background:#fff; padding:15px;">
-            <h2>Cargando entorno libertario...</h2>
+        <main id="contenido-wiki">
+            <p>Iniciando...</p>
         </main>
     </div>
-
     <script src="js/wiki.js"></script>
 </body>
 </html>
