@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki Rubik Abierta</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Renderizador ligero de Markdown a HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+    <header style="text-align:center; padding: 10px; background:#f4f4f4; border-bottom:1px solid #ddd;">
+        <h1>Cubopedia 🧊</h1>
+        <p>La wiki del cubo de Rubik sin dueños ni filtros</p>
+    </header>
+
+    <div class="contenedor" style="display:flex; flex-wrap:wrap; padding:15px; gap:20px;">
+        <!-- Menú de Navegación Lateral -->
+        <nav class="menu-articulos" style="flex:1; min-width:200px; background:#fafafa; padding:15px; border-radius:5px;">
+            <h3>Secciones</h3>
+            <ul style="list-style:none; padding:0; line-height:2;">
+                <li><a href="#" onclick="cargarArticulo('inicio')">🏠 Inicio</a></li>
+                <li><a href="#" onclick="cargarArticulo('metodo-principiantes')">Método Principiantes</a></li>
+                <li><a href="#" onclick="cargarArticulo('notacion')">Notación Oficial</a></li>
+                <li><a href="#" onclick="cargarArticulo('pyraminx')">Pyraminx</a></li>
+            </ul>
+        </nav>
+
+        <!-- Vista del Post / Editor -->
+        <main id="contenido-wiki" style="flex:3; min-width:300px; background:#fff; padding:15px;">
+            <h2>Cargando entorno libertario...</h2>
+        </main>
+    </div>
+
+    <script src="js/wiki.js"></script>
+</body>
+</html>
