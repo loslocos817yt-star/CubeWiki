@@ -47,7 +47,6 @@ async function cargarArticulo(nombreArticulo) {
         }
 
         const datos = await response.json();
-        // Evitamos problemas de eñes y acentos con decodeURIComponent + escape
         const markdownTexto = decodeURIComponent(escape(atob(datos.content.replace(/\s/g, ''))));
         const shaArchivo = datos.sha; 
 
