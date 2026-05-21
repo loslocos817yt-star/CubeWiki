@@ -1,3 +1,9 @@
+// --- CONFIGURACIÓN SUPABASE ---
+const supabaseUrl = 'https://nzqwzcxhfuzuwektxulj.supabase.co';
+const supabaseKey = 'sb_publishable_srsvIDQwXfYgfMyOcnQ5Lg_nIz-uwhC';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// ------------------------------
+
 const USER = "loslocos817yt-star";
 const REPO = "CubeWiki";
 const GH_TOKEN = atob("Z2hwX3BsV256Z0swMTltalRnejlaMDQ3M1dYN0ZQV1k5cjI4c0syNw==");
