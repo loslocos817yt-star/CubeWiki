@@ -1,1 +1,1 @@
-No se wey, tranquilo 
+No se wey, tranquilo 🗣️🔥
