@@ -1,6 +1,6 @@
 const USER = "loslocos817yt-star";
 const REPO = "CubeWiki";
-const GH_TOKEN = "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"; 
+const GH_TOKEN = "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"; 
 const API_BASE = "https://api.github.com/repos/" + USER + "/" + REPO + "/contents/post/";
 
 async function cargarArticulo(nombre) {
