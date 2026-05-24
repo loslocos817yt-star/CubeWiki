@@ -1,3 +1,3 @@
-Hola watones 
-[R U R' U']
+Hola botones 
+[R U R' U' = pyraminx]
 [seccion: no se]
