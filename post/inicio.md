@@ -1,7 +1,7 @@
 # Mis Algoritmos Favoritos
 
 Aquí tienes un ejemplo de un 3x3 normal:
-[R U R' U'] = 3x3
+[R U R' U'] = 3x3×3
 
 Ahora, un movimiento para Piraminx:
 [U L' R L] = pyraminx
