@@ -11,6 +11,30 @@ function decodificarBinario(bin) {
 const GH_TOKEN = decodificarBinario(BIN_TOKEN);
 const API_BASE = "https://api.github.com/repos/" + USER + "/" + REPO + "/contents/post/";
 
+// Mapeo exacto para que la librería entienda los nombres del menú sin fallar
+const puzzleMap = {
+    "square-1": "square1",
+    "face-turning octahedron": "fto",
+    "melinda's 2x2x2x2": "melindas2x2x2x2",
+    "2x2x2 cube": "2x2x2",
+    "3x3x3 cube": "3x3x3",
+    "4x4x4 cube": "4x4x4",
+    "5x5x5 cube": "5x5x5",
+    "6x6x6 cube": "6x6x6",
+    "7x7x7 cube": "7x7x7",
+    "redi cube": "redi_cube",
+    "master tetraminx": "master_tetraminx",
+    "baby fto": "baby_fto",
+    "triquad": "triquad",
+    "loopover": "loopover"
+};
+
+function normalizarCubo(nombre) {
+    let n = nombre.toLowerCase().trim();
+    // Si el nombre está en el mapa, usa el ID oficial. Si no, quita espacios por seguridad.
+    return puzzleMap[n] || n.replace(/\s+/g, '_');
+}
+
 async function cargarArticulo(nombre) {
     if(!nombre) nombre = 'inicio';
     const cont = document.getElementById('contenido-wiki');
@@ -31,7 +55,16 @@ async function cargarArticulo(nombre) {
 
         let procesado = content
             .replace(/(https?:\/\/[^\s]+?\.(?:jpg|jpeg|png|gif|webp))/gi, '<img src="$1" style="max-width:100%; border-radius:8px;">')
-            .replace(/\[([^\]]+)\]/g, '<div class="player-container"><twisty-player alg="$1" control-panel="bottom"></twisty-player></div>');
+            // Ahora captura letras, números, espacios, guiones y apóstrofes para que no se le escape ninguno
+            .replace(/\[([^\]]+)\]\s*=\s*([a-zA-Z0-9\s\-\'xX]+)/g, (match, alg, puzzleRaw) => {
+                let puzzleNameDisplay = puzzleRaw.trim();
+                let puzzleId = normalizarCubo(puzzleNameDisplay);
+                
+                return `<div class="player-container">
+                            <p><strong>Cubo:</strong> ${puzzleNameDisplay}</p>
+                            <twisty-player alg="${alg}" puzzle="${puzzleId}" control-panel="bottom"></twisty-player>
+                        </div>`;
+            });
 
         const render = marked.parse(procesado);
         cont.innerHTML = `<div class="texto-md">${render}</div><hr><button onclick="editar('${nombre}', \`${content.replace(/`/g, '\\`')}\`, '${data.sha}')">✏️ Editar</button>`;
@@ -68,3 +101,4 @@ async function guardar(nombre, sha) {
 }
 
 window.onload = () => cargarArticulo('inicio');
+                                                                    
