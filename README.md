@@ -1,5 +1,17 @@
 # CubeWiki
 
-*Hola*
-no se que vrg hagas en el repositorio oficial de Cube Wiki
-si planeas ***MODIFICAR*** el repositorio, se te pide (*****POR FAVOR****) no lo hagas wey, no mames, te voy a papear si lo haces.
+*Hola.*
+
+No sé qué vrg hagas en el repositorio oficial de CubeWiki.
+
+Si planeas **MODIFICAR** el repositorio, se te pide (**POR FAVOR**) que no lo hagas, wey. No mames.
+
+Te voy a papear si lo haces. 👍
+
+---
+
+## ¿Qué es CubeWiki?
+
+Ni yo sé.
+
+Pero aquí está el código.
